@@ -1,0 +1,64 @@
+=============================================================
+START SCRIPT: ScriptManagementHyperviser.sh
+=============================================================
+Date : 2026-02-20 19:23:10
+=============================================================
+2026-02-20 19:23:15 [INFO] - ip esxi set : esxi.labo.local with username root 
+2026-02-20 19:23:18 [INFO] - Action List VMs in ESXI : Vmid       Name                             File                          Guest OS      Version   Annotation
+2      ubuntu-server   [datastore] VM/ubuntu-server/ubuntu-server.vmx   ubuntu64Guest   vmx-21              
+4      db_server       [datastore] db_server/db_server.vmx              ubuntu64Guest   vmx-21              
+
+VM ACTIF: 
+2026-02-20 19:23:26 [INFO] - Action start in ESXI on VM 2 : Powering on VM:
+2026-02-20 19:23:27 [INFO] - Action List VMs in ESXI : Vmid       Name                             File                          Guest OS      Version   Annotation
+2      ubuntu-server   [datastore] VM/ubuntu-server/ubuntu-server.vmx   ubuntu64Guest   vmx-21              
+4      db_server       [datastore] db_server/db_server.vmx              ubuntu64Guest   vmx-21              
+
+VM ACTIF: 
+World ID  Name           Num Ports  Networks
+--------  -------------  ---------  --------
+  527300  ubuntu-server          2  DB-Only, Network-Public
+2026-02-20 19:23:35 [INFO] - Action stop in ESXI on VM 2 : Powering off VM:
+2026-02-20 19:23:43 [INFO] - Action in ESXI Network Portgroup 
+2026-02-20 19:24:04 [INFO] - Action in ESXI Network deleting Vlan-Web in vSwitch0
+2026-02-20 19:24:12 [INFO] - Action in ESXI Network Portgroup 
+2026-02-20 19:24:48 [INFO] - Action create in ESXI : Create Snapshot: 
+2026-02-20 19:24:57 [INFO] - Action get in ESXI : Get Snapshot:
+|-ROOT
+--Snapshot Name        : avant-modif
+--Snapshot Id        : 1
+--Snapshot Desciption  : 
+--Snapshot Created On  : 1/21/2026 15:34:27
+--Snapshot State       : powered on
+--|-CHILD
+----Snapshot Name        : testscript
+----Snapshot Id        : 4
+----Snapshot Desciption  : 
+----Snapshot Created On  : 2/5/2026 20:51:50
+----Snapshot State       : powered off
+----|-CHILD
+------Snapshot Name        : testscript
+------Snapshot Id        : 5
+------Snapshot Desciption  : 
+------Snapshot Created On  : 2/6/2026 18:34:45
+------Snapshot State       : powered off
+------|-CHILD
+--------Snapshot Name        : snapshot20260220
+--------Snapshot Id        : 6
+--------Snapshot Desciption  : 
+--------Snapshot Created On  : 2/20/2026 19:24:46
+--------Snapshot State       : powered off 
+2026-02-20 19:25:07 [INFO] - Action list in ESXI : User ID  Description                                  Shell access
+-------  -------------------------------------------  ------------
+root     Administrator                                        true
+dcui     DCUI User                                            true
+vpxuser  VMware VirtualCenter administration account          true 
+2026-02-20 19:25:16 [INFO] - Action list in ESXI : Principal  Is Group  Role   Role Description
+---------  --------  -----  ----------------
+dcui          false  Admin  Full access rights
+root          false  Admin  Full access rights
+vpxuser       false  Admin  Full access rights 
+=============================================================
+    END SCRIPT
+Date : 2026-02-20 19:25:20
+=============================================================
