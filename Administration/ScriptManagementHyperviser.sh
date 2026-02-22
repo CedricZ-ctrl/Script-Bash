@@ -145,17 +145,34 @@ function ListVMProxmox {
 }
 
 function StartStopOrRebootVMProxmox {
-    choice=$(CheckString "you want start, stop or reboot vm ? ")
-    vmid=$(CheckNumber "Enter the vmid to $choice ")
+    local choice=$(CheckString "you want : Start ? Stop ? or Reboot ?: ")
+    local vmid=$(CheckNumber "Enter the vmid target: ")
+    local cmd=""
 
-    if [[ "$choice" == "start" ]]; then
+    case "$choice" in
+
+    "Start")
     cmd="start"
-    elif [[ "$choice" == "stop" ]]; then
-    cmd="shutdown"
-    elif [[ "$choice" == "reboot" ]]; then
+    write-log "Choice $choice" "INFO"
+    ;;
+
+    "Stop")
+    cmd="stop"
+    write-log "Choice $choice" "INFO"
+    ;;
+
+    "Reboot")
     cmd="reboot"
-    fi
-    echo "Run $choice on VM ID : $vmid "
+    write-log "Choice $choice" "INFO"
+    ;;
+
+    *) 
+    echo "choice invalid, among Start,Stop or Reboot "
+    write-log "Choice Invalid, : $choice" "INFO"
+    ;;
+    esac 
+
+    write-log "Run $choice on VM ID : $vmid " "INFO"
     result=$(ssh "$PVE_USER@$PVE_IP" "qm $cmd $vmid")
 
     status_ssh=$?
@@ -165,21 +182,38 @@ function StartStopOrRebootVMProxmox {
     else 
     write-log "Action $choice in PROXMOX on VM $vmid : ExitCode : $status_ssh " "ERROR"
     fi 
-    echo "$status_ssh"
+    echo "$choice VM $vmid = Exitcode: $status_ssh"
 }
 
 function LXCStartRebootRemoveProxmox {
 
-    choice=$(CheckString "you want start, stop or reboot LXC ? ")
-    vmid=$(CheckNumber "Enter the vmid to $choice ")
+    local choice=$(CheckString "you want Start, Stop or Reboot LXC ?: ")
+    local vmid=$(CheckNumber "Enter the lxc target : ")
+    local cmd=""
 
-    if [[ "$choice" == "start" ]]; then
+    case "$choice" in
+
+    "Start")
     cmd="start"
-    elif [[ "$choice" == "stop" ]]; then
-    cmd="shutdown"
-    elif [[ "$choice" == "reboot" ]]; then
+    write-log "Choice $choice" "INFO"
+    ;;
+
+    "Stop")
+    cmd="stop"
+    write-log "Choice $choice" "INFO"
+    ;;
+
+    "Reboot")
     cmd="reboot"
-    fi
+    write-log "Choice $choice" "INFO"
+    ;;
+
+    *) 
+    echo "choice invalid, among Start,Stop or Reboot "
+    write-log "Choice Invalid, : $choice" "INFO"
+    ;;
+    esac 
+
     echo "Run $choice in LXC ID :  $vmid "
     result=$(ssh "$PVE_USER@$PVE_IP" "pct $cmd $vmid")
 
@@ -191,7 +225,7 @@ function LXCStartRebootRemoveProxmox {
     write-log "Action $choice in PROXMOX on LXC $vmid : ExitCode : $status_ssh " "ERROR"
     fi 
 
-    echo "$status_ssh"
+    echo "$choice LXC $vmid = ExitCode: $status_ssh"
 }
 
 function SubMenu_Network_Proxmox {
