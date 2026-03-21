@@ -1,23 +1,23 @@
 =============================================================
 START SCRIPT: CheckNetwork.sh
 =============================================================
-Date : 2026-03-21 15:46:53
+Date : 2026-03-21 15:56:28
 =============================================================
-2026-03-21 15:46:53 [INFO] - interface and ip : eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> 
-2026-03-21 15:46:53 [INFO] - interface and ip : link/ether bc:24:11:95:62:b7 
-2026-03-21 15:46:53 [INFO] - interface and ip : inet 192.168.1.200/24 
-2026-03-21 15:46:53 [INFO] - interface and ip : -- 
-2026-03-21 15:46:53 [INFO] - interface and ip : ens19: <BROADCAST,MULTICAST,UP,LOWER_UP> 
-2026-03-21 15:46:53 [INFO] - interface and ip : link/ether bc:24:11:a7:1a:86 
-2026-03-21 15:46:53 [INFO] - interface and ip : inet 10.0.0.1/24 
-2026-03-21 15:46:53 [INFO] - interface and ip : -- 
-2026-03-21 15:46:53 [INFO] - interface and ip : ens20: <BROADCAST,MULTICAST> 
-2026-03-21 15:46:53 [INFO] - interface and ip : link/ether bc:24:11:be:b2:54 
-2026-03-21 15:47:05 [INFO] - Info Route : default via 192.168.1.254 dev eth0 proto static 
+2026-03-21 15:56:28 [INFO] - interface and ip : eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> 
+2026-03-21 15:56:28 [INFO] - interface and ip : link/ether bc:24:11:95:62:b7 
+2026-03-21 15:56:28 [INFO] - interface and ip : inet 192.168.1.200/24 
+2026-03-21 15:56:28 [INFO] - interface and ip : -- 
+2026-03-21 15:56:28 [INFO] - interface and ip : ens19: <BROADCAST,MULTICAST,UP,LOWER_UP> 
+2026-03-21 15:56:28 [INFO] - interface and ip : link/ether bc:24:11:a7:1a:86 
+2026-03-21 15:56:28 [INFO] - interface and ip : inet 10.0.0.1/24 
+2026-03-21 15:56:28 [INFO] - interface and ip : -- 
+2026-03-21 15:56:28 [INFO] - interface and ip : ens20: <BROADCAST,MULTICAST> 
+2026-03-21 15:56:28 [INFO] - interface and ip : link/ether bc:24:11:be:b2:54 
+2026-03-21 15:56:30 [INFO] - Info Route : default via 192.168.1.254 dev eth0 proto static 
 10.0.0.0/24 dev ens19 proto kernel scope link src 10.0.0.1 
 192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.200 
-2026-03-21 15:47:07 [INFO] - Name Interface found : eth0:
-2026-03-21 15:47:07 [INFO] - Resultat of command ethtool eth0:: Settings for eth0::
+2026-03-21 15:56:31 [INFO] - Name Interface found : eth0:
+2026-03-21 15:56:31 [INFO] - Resultat of command ethtool eth0:: Settings for eth0::
 	Supported ports: [ ]
 	Supported link modes:   Not reported
 	Supported pause frame use: No
@@ -34,8 +34,8 @@ Date : 2026-03-21 15:46:53
 	Transceiver: internal
 	Auto-negotiation: off
 	Link detected: yes 
-2026-03-21 15:47:07 [INFO] - Name Interface found : ens19:
-2026-03-21 15:47:07 [INFO] - Resultat of command ethtool ens19:: Settings for ens19::
+2026-03-21 15:56:31 [INFO] - Name Interface found : ens19:
+2026-03-21 15:56:31 [INFO] - Resultat of command ethtool ens19:: Settings for ens19::
 	Supported ports: [ TP ]
 	Supported link modes:   10baseT/Half 10baseT/Full 
 	                        100baseT/Half 100baseT/Full 
@@ -61,8 +61,8 @@ Date : 2026-03-21 15:46:53
 	Current message level: 0x00000007 (7)
 			       drv probe link
 	Link detected: yes 
-2026-03-21 15:47:07 [INFO] - Name Interface found : ens20:
-2026-03-21 15:47:07 [INFO] - Resultat of command ethtool ens20:: Settings for ens20::
+2026-03-21 15:56:31 [INFO] - Name Interface found : ens20:
+2026-03-21 15:56:31 [INFO] - Resultat of command ethtool ens20:: Settings for ens20::
 	Supported ports: [ TP ]
 	Supported link modes:   10baseT/Half 10baseT/Full 
 	                        100baseT/Half 100baseT/Full 
@@ -88,39 +88,46 @@ Date : 2026-03-21 15:46:53
 	Current message level: 0x00000007 (7)
 			       drv probe link
 	Link detected: no 
-2026-03-21 15:47:36 [INFO] - Start: 2026-03-21T15:47:10+0100
-HOST: dev0                                                           Jttr  Javg  Jmax  Loss%   Snt   Rcv   Last   Avg   Best   Wrst  StDev
-  1. AS5410   2001:861:5602:edf0:1c59:291c:11c:6869                   0.1   0.1   0.4   0.0%    20    20    0.8   0.7    0.5    0.9    0.1
-  2. AS???    ???                                                     0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
-  3. AS???    ???                                                     0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
-  4. AS???    ???                                                     0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
-  5. AS???    ???                                                     0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
-  6. AS???    ???                                                     0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
-  7. AS15169  par10s29-in-x0e.1e100.net (2a00:1450:4007:80f::200e)    2.4   0.7   2.4   0.0%    20    20    6.4   7.5    6.3    8.9    0.8
-2026-03-21 15:47:42 [INFO] - RESULTAT COMMAND on dev : eth0: 15:47:40.185979 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+2026-03-21 15:57:01 [INFO] - MTR on target : google.com : Start: 2026-03-21T15:56:36+0100
+HOST: dev0                                                          Jttr  Javg  Jmax  Loss%   Snt   Rcv   Last   Avg   Best   Wrst  StDev
+  1. AS5410   2001:861:5602:edf0:1c59:291c:11c:6869                  0.3   0.2   0.3   0.0%    20    20    0.9   0.8    0.5    1.1    0.1
+  2. AS???    ???                                                    0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
+  3. AS???    ???                                                    0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
+  4. AS???    ???                                                    0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
+  5. AS???    ???                                                    0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
+  6. AS???    ???                                                    0.0   0.0   0.0  100.0    20     0    0.0   0.0    0.0    0.0    0.0
+  7. AS15169  pnpara-ae-in-x0e.1e100.net (2a00:1450:4007:812::200e)  0.1   0.9   1.9   0.0%    20    20    8.0   8.4    7.4   10.0    0.8 
+2026-03-21 15:57:16 [INFO] - RESULTAT COMMAND on dev : eth0: 15:57:08.196822 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
 	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
 	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0
-15:47:41.074769 IP6 (hlim 255, next-header ICMPv6 (58) payload length: 32) fe80::be24:11ff:fe95:62b7 > 2001:861:5602:edf0:56c4:5bff:fe7d:b4dc: [icmp6 sum ok] ICMP6, neighbor solicitation, length 32, who has 2001:861:5602:edf0:56c4:5bff:fe7d:b4dc
-	  source link-address option (1), length 8 (1): bc:24:11:95:62:b7
-15:47:41.075579 IP6 (hlim 255, next-header ICMPv6 (58) payload length: 24) 2001:861:5602:edf0:56c4:5bff:fe7d:b4dc > fe80::be24:11ff:fe95:62b7: [icmp6 sum ok] ICMP6, neighbor advertisement, length 24, tgt is 2001:861:5602:edf0:56c4:5bff:fe7d:b4dc, Flags [router, solicited]
-15:47:41.396235 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.107 tell 192.168.1.245, length 28
-15:47:42.170002 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+15:57:10.180868 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
+	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0
+15:57:12.228918 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
+	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0
+15:57:14.213160 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
+	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0
+15:57:16.196992 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
 	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
 	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0:  
-2026-03-21 15:47:47 [INFO] - RESULTAT COMMAND on dev : ens19: 15:47:43.362709 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.107 tell 192.168.1.245, length 46
-15:47:43.474530 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.1.107 tell 192.168.1.245, length 46
-15:47:44.218279 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+2026-03-21 15:57:27 [INFO] - RESULTAT COMMAND on dev : ens19: 15:57:18.181175 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
 	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
 	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0
-15:47:46.202306 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+15:57:20.229281 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
 	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
 	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0
-15:47:47.319546 54:c4:5b:7d:b4:d3 > 01:80:c2:00:00:13, ethertype IEEE1905.1 (0x893a), length 60: 
-	0x0000:  0000 0000 d8b0 0080 0100 0654 c45b 7db4  ...........T.[}.
-	0x0010:  d302 0006 54c4 5b7d b4dc 0000 0000 0000  ....T.[}........
-	0x0020:  0000 0000 0000 0000 0000 0000 0000       ..............:  
-2026-03-21 15:47:47 [ERROR] - command tcpdump fail with dev ens20:
+15:57:22.213314 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
+	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0
+15:57:24.197322 STP 802.1d, Config, Flags [none], bridge-id 7000.54:c4:5b:7d:b4:dc.8005, length 43
+	message-age 0.00s, max-age 20.00s, hello-time 2.00s, forwarding-delay 5.00s
+	root-id 7000.54:c4:5b:7d:b4:dc, root-pathcost 0
+15:57:26.075557 IP (tos 0xa0, ttl 1, id 25384, offset 0, flags [DF], proto IGMP (2), length 32, options (RA))
+    192.168.1.254 > 224.0.0.1: igmp query v2:  
+2026-03-21 15:57:27 [ERROR] - command tcpdump fail with dev ens20:
 =============================================================
 END SCRIPT
-Date : 2026-03-21 15:47:55
+Date : 2026-03-21 15:57:29
 =============================================================

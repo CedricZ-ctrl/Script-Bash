@@ -10,7 +10,7 @@ fi
 #================================================================================================================#
 #         CONFIGURATION LOGS                                                                                     #
 #================================================================================================================#
-pathdirlog="/home/bandit/Scripts/Script Linux/Monitoring/Logs"
+pathdirlog="/home/bandit/Scripts/Script Linux/Administration/Logs"
 pathfilelog="$pathdirlog/CheckNetwork.log"
 
 SEPARATOR="============================================================="
@@ -104,7 +104,7 @@ function traceroute {
     if [[ -n "$input" ]]; then
         command=$(mtr -o 'J M X LSR NA B W V' -wzbc 20 $input)
         echo "$command:[test end with  target $input]"
-        write-log "$command" "INFO"
+        write-log "MTR on target : $input : $command " "INFO"
     else
         write-log "no information for testing routage" "ERROR"
     fi
