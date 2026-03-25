@@ -1,38 +1,73 @@
 =============================================================
 START SCRIPT: check_system.sh
 =============================================================
-Date : 2026-02-21 22:41:46
+Date : 2026-03-25 21:47:05
 =============================================================
-2026-02-21 22:41:46 [INFO] - 1min,5min,15min : average: 0.00, 0.00, 0.00
-2026-02-21 22:41:46 [INFO] - up 1 day, 6 hours, 8 minutes
-2026-02-21 22:41:46 [INFO] - Ram : total,used,free -> 3.8Gi 172Mi 2.8Gi
-2026-02-21 22:41:49 [INFO] - Space Disk  used in /dev/sda1 is busy at 37% and Mounted on /
-2026-02-21 22:41:52 [INFO] - the check ping 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
-rtt min/avg/max/mdev = 6.409/8.050/9.530/1.182 ms 
-2026-02-21 22:41:52 [INFO] - resolve domain name google.com : Address: 142.251.209.142
+2026-03-25 21:47:06 [INFO] - 1min,5min,15min : average: 0.00, 0.00, 0.00
+2026-03-25 21:47:06 [INFO] - up 1 week, 3 days, 10 hours,
+2026-03-25 21:47:07 [INFO] - Ram : total,used,free -> 3.8Gi 206Mi 2.5Gi
+2026-03-25 21:47:08 [INFO] - Space Disk used in /dev/sda1 is busy at 44%
+2026-03-25 21:47:08 [INFO] - Space Disk used in /dev/sda15 is busy at 6%
+2026-03-25 21:47:08 [INFO] - Resultat for the disk sda : smartctl 7.1 2019-12-30 r5022 [x86_64-linux-5.4.0-216-generic] (local build)
+Copyright (C) 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               QEMU
+Product:              QEMU HARDDISK
+Revision:             2.5+
+Compliance:           SPC-3
+User Capacity:        10,737,418,240 bytes [10.7 GB]
+Logical block size:   512 bytes
+LU is thin provisioned, LBPRZ=0
+Device type:          disk
+Local Time is:        Wed Mar 25 21:47:08 2026 CET
+SMART support is:     Unavailable - device lacks SMART capability.
+
+=== START OF READ SMART DATA SECTION ===
+Current Drive Temperature:     0 C
+Drive Trip Temperature:        0 C
+
+Error Counter logging not supported
+
+Device does not support Self Test logging
+2026-03-25 21:47:08 [INFO] - Resultat for the disk sdb : smartctl 7.1 2019-12-30 r5022 [x86_64-linux-5.4.0-216-generic] (local build)
+Copyright (C) 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               QEMU
+Product:              QEMU HARDDISK
+Revision:             2.5+
+Compliance:           SPC-3
+User Capacity:        10,737,418,240 bytes [10.7 GB]
+Logical block size:   512 bytes
+LU is thin provisioned, LBPRZ=0
+Device type:          disk
+Local Time is:        Wed Mar 25 21:47:08 2026 CET
+SMART support is:     Unavailable - device lacks SMART capability.
+
+=== START OF READ SMART DATA SECTION ===
+Current Drive Temperature:     0 C
+Drive Trip Temperature:        0 C
+
+Error Counter logging not supported
+
+Device does not support Self Test logging
+2026-03-25 21:47:10 [INFO] - interface and ip : eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> 
+2026-03-25 21:47:10 [INFO] - interface and ip : link/ether bc:24:11:95:62:b7 
+2026-03-25 21:47:10 [INFO] - interface and ip : inet 192.168.1.200/24 
+2026-03-25 21:47:10 [INFO] - interface and ip : -- 
+2026-03-25 21:47:10 [INFO] - interface and ip : ens19: <BROADCAST,MULTICAST,UP,LOWER_UP> 
+2026-03-25 21:47:10 [INFO] - interface and ip : link/ether bc:24:11:a7:1a:86 
+2026-03-25 21:47:10 [INFO] - interface and ip : inet 10.0.0.1/24 
+2026-03-25 21:47:10 [INFO] - interface and ip : -- 
+2026-03-25 21:47:10 [INFO] - interface and ip : ens20: <BROADCAST,MULTICAST> 
+2026-03-25 21:47:10 [INFO] - interface and ip : link/ether bc:24:11:be:b2:54 
+2026-03-25 21:47:13 [INFO] - the check ping 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
+rtt min/avg/max/mdev = 6.903/8.192/8.967/0.845 ms 
+2026-03-25 21:47:13 [INFO] - resolve domain name google.com : Address: 172.217.22.174
 Address: 2a00:1450:4007:809::200e 
-2026-02-21 22:41:56 [INFO] - the interface eth0 -> receipt: 43Mo and send: 36Mo in date Sat Feb 21 22:41:46 
+2026-03-25 21:47:17 [INFO] - the interface ens19 -> receipt: 24Mo and send: 0Mo in date Wed Mar 25 21:47:05 
 =============================================================
 END SCRIPT
-Date : 2026-02-21 22:41:56
-=============================================================
-=============================================================
-START SCRIPT: check_system.sh
-=============================================================
-Date : 2026-02-21 22:42:00
-=============================================================
-2026-02-21 22:42:00 [INFO] - 1min,5min,15min : average: 0.00, 0.00, 0.00
-2026-02-21 22:42:00 [INFO] - up 1 day, 6 hours, 8 minutes
-2026-02-21 22:42:00 [INFO] - Ram : total,used,free -> 3.8Gi 171Mi 2.8Gi
-2026-02-21 22:42:04 [ERROR] - the df -h command did not work: Exitcode : df: /dev/sdc: No such file or directory
-2026-02-21 22:42:04 [ERROR] - The function StateDisk Failed
-2026-02-21 22:42:07 [INFO] - the check ping 4 packets transmitted, 4 received, 0% packet loss, time 3005ms
-rtt min/avg/max/mdev = 6.511/7.031/7.401/0.353 ms 
-2026-02-21 22:42:07 [INFO] - resolve domain name google.com : Address: 142.251.209.142
-Address: 2a00:1450:4007:809::200e 
-2026-02-21 22:42:13 [ERROR] - the check interface static eth1  does not exist 
-2026-02-21 22:42:13 [ERROR] - The function CheckNetwork Failed
-=============================================================
-END SCRIPT
-Date : 2026-02-21 22:42:13
+Date : 2026-03-25 21:47:21
 =============================================================
