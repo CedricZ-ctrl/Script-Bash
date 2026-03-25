@@ -219,25 +219,6 @@ function MenuCheckSystem {
     esac 
     done
 
-LoadAvg
-if [[ ! $? -eq 0 ]]; then
-write-log "The function LoadAvg Failed" "ERROR"
-fi 
-
-StateRam
-if [[ ! $? -eq 0 ]]; then
-write-log "The function StateRam Failed" "ERROR"
-fi
-
-StateDisk
-if [[ ! $? -eq 0 ]]; then
-write-log "The function StateDisk Failed" "ERROR"
-fi
-
-CheckNetwork
-if [[ ! $? -eq 0 ]]; then
-write-log "The function CheckNetwork Failed" "ERROR"
-fi
 
 }
 
