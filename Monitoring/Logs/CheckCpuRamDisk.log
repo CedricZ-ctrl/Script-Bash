@@ -1,0 +1,119 @@
+2026-03-26 00:15:40 [INFO] - Tools Smartctl already present
+2026-03-26 00:15:40 [INFO] - Resultat for the disk sda : smartctl 7.1 2019-12-30 r5022 [x86_64-linux-5.4.0-216-generic] (local build)
+Copyright (C) 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               QEMU
+Product:              QEMU HARDDISK
+Revision:             2.5+
+Compliance:           SPC-3
+User Capacity:        10,737,418,240 bytes [10.7 GB]
+Logical block size:   512 bytes
+LU is thin provisioned, LBPRZ=0
+Device type:          disk
+Local Time is:        Thu Mar 26 00:15:40 2026 CET
+SMART support is:     Unavailable - device lacks SMART capability.
+
+=== START OF READ SMART DATA SECTION ===
+Current Drive Temperature:     0 C
+Drive Trip Temperature:        0 C
+
+Error Counter logging not supported
+
+Device does not support Self Test logging
+2026-03-26 00:15:40 [INFO] - Resultat for the disk sdb : smartctl 7.1 2019-12-30 r5022 [x86_64-linux-5.4.0-216-generic] (local build)
+Copyright (C) 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               QEMU
+Product:              QEMU HARDDISK
+Revision:             2.5+
+Compliance:           SPC-3
+User Capacity:        10,737,418,240 bytes [10.7 GB]
+Logical block size:   512 bytes
+LU is thin provisioned, LBPRZ=0
+Device type:          disk
+Local Time is:        Thu Mar 26 00:15:40 2026 CET
+SMART support is:     Unavailable - device lacks SMART capability.
+
+=== START OF READ SMART DATA SECTION ===
+Current Drive Temperature:     0 C
+Drive Trip Temperature:        0 C
+
+Error Counter logging not supported
+
+Device does not support Self Test logging
+=============================================================
+END SCRIPT
+Date : 2026-03-26 00:15:41
+=============================================================
+=============================================================
+START SCRIPT: CheckCpuNetworkRamDisk.sh
+=============================================================
+Date : 2026-03-26 00:16:15
+=============================================================
+2026-03-26 00:16:17 [INFO] - Tools stress-ng already present
+2026-03-26 00:17:17 [INFO] -  stress-ng: info:  [32725] dispatching hogs: 2 cpu, 2 io
+stress-ng: info:  [32725] successful run completed in 60.01s (1 min, 0.01 secs)
+stress-ng: info:  [32725] stressor       bogo ops real time  usr time  sys time   bogo ops/s   bogo ops/s
+stress-ng: info:  [32725]                           (secs)    (secs)    (secs)   (real time) (usr+sys time)
+stress-ng: info:  [32725] cpu               16355     60.01     55.44     10.77       272.53       247.02
+stress-ng: info:  [32725] io               966824     60.00      1.77     16.87     16113.72     51868.24 : 
+=============================================================
+END SCRIPT
+Date : 2026-03-26 00:17:20
+=============================================================
+=============================================================
+START SCRIPT: CheckCpuNetworkRamDisk.sh
+=============================================================
+Date : 2026-03-26 00:18:41
+=============================================================
+2026-03-26 00:18:44 [INFO] - Tools Smartctl already present
+2026-03-26 00:18:44 [INFO] - Resultat for the disk sda : smartctl 7.1 2019-12-30 r5022 [x86_64-linux-5.4.0-216-generic] (local build)
+Copyright (C) 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               QEMU
+Product:              QEMU HARDDISK
+Revision:             2.5+
+Compliance:           SPC-3
+User Capacity:        10,737,418,240 bytes [10.7 GB]
+Logical block size:   512 bytes
+LU is thin provisioned, LBPRZ=0
+Device type:          disk
+Local Time is:        Thu Mar 26 00:18:44 2026 CET
+SMART support is:     Unavailable - device lacks SMART capability.
+
+=== START OF READ SMART DATA SECTION ===
+Current Drive Temperature:     0 C
+Drive Trip Temperature:        0 C
+
+Error Counter logging not supported
+
+Device does not support Self Test logging
+2026-03-26 00:18:44 [INFO] - Resultat for the disk sdb : smartctl 7.1 2019-12-30 r5022 [x86_64-linux-5.4.0-216-generic] (local build)
+Copyright (C) 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               QEMU
+Product:              QEMU HARDDISK
+Revision:             2.5+
+Compliance:           SPC-3
+User Capacity:        10,737,418,240 bytes [10.7 GB]
+Logical block size:   512 bytes
+LU is thin provisioned, LBPRZ=0
+Device type:          disk
+Local Time is:        Thu Mar 26 00:18:44 2026 CET
+SMART support is:     Unavailable - device lacks SMART capability.
+
+=== START OF READ SMART DATA SECTION ===
+Current Drive Temperature:     0 C
+Drive Trip Temperature:        0 C
+
+Error Counter logging not supported
+
+Device does not support Self Test logging
+=============================================================
+END SCRIPT
+Date : 2026-03-26 00:18:45
+=============================================================
