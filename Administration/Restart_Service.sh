@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pathdirlog="/home/bandit/Scripts/Logs"
+pathdirlog="$HOME/Scripts/Script Linux/Monitoring/Logs"
 pathfilelog="$pathdirlog/Restart_service.log"
 
 services_list=()
@@ -24,7 +24,7 @@ function HeaderLog {
 }
 
 #example : write-log " the regex found " "INFO"
-function write_log {
+function write-log {
         local message="$1"
         local event="$2"
         local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
@@ -50,35 +50,35 @@ function EndLog {
 function check_service {
 
     read -p "Enter the different(s) services, you want managed : " -a services_list
-    write_log "List of services :  ${services_list[*]}." "INFO"
+    write-log "List of services :  ${services_list[*]}." "INFO"
 
 	for svc in "${services_list[@]}"; do
 		service_active=$(systemctl is-active "$svc" 2>&1) 
 		if [[ "$service_active" == "active" ]]; then
-			write_log "service $svc is running." "INFO"
+			write-log "service $svc is running." "INFO"
 		else
-            write_log "Service $svc stopped." "INFO"
+            write-log "Service $svc stopped." "INFO"
 			sudo systemctl start "$svc"
             if [[ $? -eq 0 ]]; then 
-            write_log "the $svc has been started. " "INFO"
+            write-log "the $svc has been started. " "INFO"
             else 
-            write_log "started failed for $svc : Exitcode : $service_active" "ERROR"
+            write-log "started failed for $svc : Exitcode : $service_active" "ERROR"
             fi
 		fi
 
         service_enabled=$(systemctl is-enabled "$svc" 2>&1)
         if [[ "$service_enabled" == "disabled" ]]; then 
-            write_log "Service $svc is $service_enabled, next boot the $svc don't running. enabling in progress...." "WARNING"
+            write-log "Service $svc is $service_enabled, next boot the $svc don't running. enabling in progress...." "WARNING"
             sudo systemctl enable $svc
             if [[ $? -eq 0 ]]; then 
-            write_log "the $svc has been enable. " "INFO"
+            write-log "the $svc has been enable. " "INFO"
             else 
-            write_log "enable failed for $svc : Exitcode : $service_enabled" "ERROR"
+            write-log "enable failed for $svc : Exitcode : $service_enabled" "ERROR"
             fi
         elif [[ "$service_enabled" == "enabled" ]]; then 
-            write_log "Service $svc is already enable. " "INFO"
+            write-log "Service $svc is already enable. " "INFO"
         else 
-            write_log "Service $svc status is : $service_enabled." "INFO"
+            write-log "Service $svc status is : $service_enabled." "INFO"
         fi
 	done
 }
