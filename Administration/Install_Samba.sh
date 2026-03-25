@@ -10,7 +10,7 @@ usersamba=""
 sharesamba=""
 namedir=""
 
-pathdirlog="/home/bandit/Logs"
+pathdirlog="$HOME/Scripts/Script Linux/Administration/Logs"
 pathfilelog="$pathdirlog/Install_samba.log"
 
 # pour utiliser la function write-log il faut la syntax suivante:
@@ -67,7 +67,7 @@ function checkstatusFunction {
 }
 
 function CheckSambaispresent {
-sambaispresent=$(dpkg -l samba)
+sambaispresent=$(command -v smbd)
 if [[ -n "$sambaispresent" ]]; then
 echo "Samba is already present go next step "
 write-log "Samba is already present go next step" "INFO"
@@ -80,7 +80,6 @@ write-log "Samba not present on system, installation Done"
 
 fi
 }
-
 
 function CreatDirectorySamba {
 read -p "Enter the name Path Directory target for creating the Samba share,(example /home/'<user>'/DirectoWorks) : " namedir
