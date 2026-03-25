@@ -75,22 +75,41 @@ function StateRam {
 }
 
 function StateDisk {
-    df -h | tr -s ' ' | cut -d ' ' -f1
 
-    read -p "Enter Partition you want to check : " filesystem
+    result=$({ df -h | grep -E '^/dev/(sd|nvme)' | tr -s ' ' | cut -d ' ' -f1,5; } 2>&1)
+    lsdisk=()
+    if [[ -n $result ]]; then
+        mapfile -t lsdisk <<< "$result"
+        for disk in "${lsdisk[@]}"; do
+        read -r used mount <<< "$disk"
+        write-log "Space Disk used in $used is busy at $mount" "INFO"
+        done 
 
-    result=$({ df -h $filesystem | tr -s ' ' | cut -d ' ' -f5,6 | tail -1; } 2>&1)
-    if [[ $? -eq 0 ]]; then
-    read -r used mount <<< "$result"
-    write-log "Space Disk  used in $filesystem is busy at $used and Mounted on $mount" "INFO"
-    return 0 
     else
     write-log "the df -h command did not work: Exitcode : $result" "ERROR"
     return 1
     fi
-}
 
+    SmartDisk
+}
+function InfoNetworkInterfaces {
+    getinterfaces=$(ip a | tr -s ' ' | grep "BROADCAST" -A 2 | cut -d ' ' -f2-3)
+    
+if [[ -n "$getinterfaces" ]]; then
+    mapfile -t arrayinterfaces <<< "$getinterfaces"
+
+    for iface in "${arrayinterfaces[@]}"; do
+    echo "$iface"
+
+    write-log "interface and ip : $iface " "INFO"
+    done
+else
+echo "variable getinterfaces empty ! "
+write-log "variable getinterfaces empty ! " "ERROR"
+fi 
+}
 function CheckNetwork {
+    InfoNetworkInterfaces
     accessnet=$( ping -c4 -q 8.8.8.8 | tail -2 )
     if [[ $? -eq 0 ]]; then
     write-log "the check ping $accessnet " "INFO"
@@ -105,7 +124,7 @@ function CheckNetwork {
     write-log "resolve domain name failed : $resolvname" "ERROR"
     fi 
 
-    read -p "Enter interface network you want check : " eth
+    read -e -p "Enter interface network you want check : " eth
     if ip link show "$eth" > /dev/null 2>&1; then
 
     rx=$({ ip -s link show $eth | grep -A 1 "RX:" | tail -1 | tr -s ' ' | cut -d ' ' -f2; } 2>&1 )
@@ -121,7 +140,85 @@ function CheckNetwork {
     fi
 }
 
-function CheckSystem {
+function StressCPU {
+    dircpu="/proc/cpuinfo"
+    cpuinfo=$(grep -c "^processor" "$dircpu")
+
+    if [[ -n "$cpuinfo" ]]; then
+    command0=$(stress-ng --metrics-brief --timeout 60s --cpu "$cpuinfo" --io "$cpuinfo" --aggressive --ignite-cpu --maximize --pathological 2>&1)
+   
+        if [[ $? -eq 0 ]]; then 
+        echo "$command0"
+        write-log " $command0 : " "INFO"
+        else
+        echo "stress-ng command fail ! " "ERROR"
+        fi
+    else 
+    echo "get information cpu no works " "ERROR"
+    fi 
+}
+
+function SmartDisk {
+
+    diskinfo=$(lsblk -dn -o NAME | grep -E "^(sd|nvme)")
+    arraydisk=()
+    if [[ -n "$diskinfo" ]]; then
+        mapfile -t arraydisk <<< "$diskinfo"
+
+        for disk in "${arraydisk[@]}"; do
+            resultat=$(smartctl -a /dev/$disk)
+            
+            echo "Resultat for the disk "$disk" : $resultat"
+            write-log "Resultat for the disk "$disk" : $resultat" "INFO"
+        done
+    else
+    write-log "Variable diskinfo empty !" "ERROR"
+    fi
+
+}
+
+function MenuCheckSystem {
+
+    while true; do
+    echo "\n---------- Menu State/Diag System ----------"
+    echo "1) Level LoadAverage"
+    echo "2) State Ram "
+    echo "3) State Disk "
+    echo "4) Check Network"
+    echo "q|Q) Quit "
+    read -p "Your choice ? : " choice 
+
+    case $choice in 
+     1) 
+     LoadAvg
+     if [[ ! $? -eq 0 ]]; then
+     write-log "The function LoadAvg Failed" "ERROR"
+     fi 
+     ;;
+     2)
+     StateRam
+     if [[ ! $? -eq 0 ]]; then
+     write-log "The function LoadAvg Failed" "ERROR"
+     fi 
+     ;;
+     3)
+     StateDisk
+     if [[ ! $? -eq 0 ]]; then
+     write-log "The function LoadAvg Failed" "ERROR"
+     fi 
+     ;;
+     4)
+     CheckNetwork
+     if [[ ! $? -eq 0 ]]; then
+     write-log "The function LoadAvg Failed" "ERROR"
+     fi 
+     ;;
+     q|Q) echo "Bye have a nice day ^^ "; return 0 
+     ;;
+
+    esac 
+    done
+
 LoadAvg
 if [[ ! $? -eq 0 ]]; then
 write-log "The function LoadAvg Failed" "ERROR"
@@ -144,7 +241,5 @@ fi
 
 }
 
-
 HeaderLog
-CheckSystem
-
+MenuCheckSystem
