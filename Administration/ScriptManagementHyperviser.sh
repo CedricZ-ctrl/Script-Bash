@@ -3,7 +3,7 @@
 #================================================================================================================#
 #         CONFIGURATION LOGS                                                                                     #
 #================================================================================================================#
-pathdirlog="/home/bandit/Scripts/Logs"
+pathdirlog="$HOME/Scripts/Logs"
 pathfilelog="$pathdirlog/ScriptManagementHyperviser.log"
 
 function CheckNumber {
@@ -356,7 +356,7 @@ function Menu_ESXI {
 
 function ListVMESXI {
     #"The ; act as commands given and move to the next one. For example, the shell runs this command first: vim-cmd vmsvc/getallvms, then moves to the next one ;, and so on. The echo "" is used to create a space."
-    result=$(ssh "$ESXI_USER@$ESXI_IP" "vim-cmd vmsvc/getallvms; echo''; echo 'VM ACTIF: '; esxcli network vm list")
+    result=$(ssh "$ESXI_USER@$ESXI_IP" "vim-cmd vmsvc/getallvms; echo ''; echo 'VM ACTIF: '; esxcli network vm list")
     write-log "Action List VMs in ESXI : $result" "INFO"
     echo "$result"
 }
