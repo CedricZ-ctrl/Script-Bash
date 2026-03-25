@@ -10,7 +10,7 @@ fi
 #================================================================================================================#
 #         CONFIGURATION LOGS                                                                                     #
 #================================================================================================================#
-pathdirlog="/home/bandit/Scripts/Script Linux/Administration/Logs"
+pathdirlog="$HOME/Scripts/Script Linux/Administration/Logs"
 pathfilelog="$pathdirlog/CheckNetwork.log"
 
 SEPARATOR="============================================================="
