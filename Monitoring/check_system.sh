@@ -5,7 +5,7 @@ datetoday=$(date | tr -s ' ' | cut -d ' ' -f1-4)
 #================================================================================================================#
 #         CONFIGURATION LOGS                                                                                     #
 #================================================================================================================#
-pathdirlog="/home/bandit/Scripts/Script Linux/Monitoring/Logs"
+pathdirlog="$HOME/Scripts/Script Linux/Monitoring/Logs"
 pathfilelog="$pathdirlog/Check_System.log"
 
 SEPARATOR="============================================================="
