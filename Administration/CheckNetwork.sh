@@ -1,7 +1,15 @@
 #!/bin/bash
-# set -o pipefail, force the pipeline return the exitcode  of the first command example for : "result=$({ df -h $filesystem | tr -s ' ' | cut -d ' ' -f5,6 | tail -1; } 2>&1)" the set -o pipefail will get the resultat of "df -h" instead of tail -1
+#================================================================================================================#
+#                   Description Script ChecNetwork                                                               #
+# this script allows you to perform an initial diagnostic on the network part of the system including            #
+# tcpdump, mtr, ip route, and any more command for the diagnostic                                                #
+#                                                                                                                #       
+#================================================================================================================#
+
+# set -o pipefail, force the pipeline return the exitcode  of the first command example for : "result=$({ df -h $filesystem | tr -s ' ' | cut -d ' ' -f5,6 | tail -1; } 2>&1)"
+# the set -o pipefail will get the resultat of "df -h" instead of tail -1
 set -o pipefail
-datetoday=$(date | tr -s ' ' | cut -d ' ' -f1-4)
+date=$(date '+%Y-%m-%d %H:%M:%S')
 arrayinterfaces=()
 if [ "$EUID" -ne 0 ];then
         echo "launch the script with privilege root"
@@ -16,8 +24,10 @@ pathfilelog="$pathdirlog/CheckNetwork.log"
 SEPARATOR="============================================================="
 
 function HeaderLog {
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-
+    local timestamp=$date
+        if [ ! -d "$pathdirlog" ];then
+                mkdir -p "$pathdirlog"
+        fi
     echo "$SEPARATOR" >> "$pathfilelog"
     echo "START SCRIPT: $(basename "$0")" >> "$pathfilelog"
     echo "$SEPARATOR" >> "$pathfilelog"
@@ -135,6 +145,25 @@ function testtcpdump {
     fi
 }
 
+function CheckSoft {
+    for soft in "${arraysoft[@]}"; do
+        checksoft=$(command -v "$soft")
+        if [[ -n "$checksoft" ]]; then
+            write-log "The Soft : $soft is present on your system" "INFO"
+        else
+            write-log "The Soft $soft is not installed, installation in progress ..." "INFO"
+
+            DEBIAN_FRONTEND=noninteractive apt update && apt install -y --no-install-recommends "$soft"
+            if [[ $? -eq 0 ]]; then
+                write-log "Installation of Soft : $soft : done ! " "INFO"
+            else
+                write-log "Installation of soft : $soft failed " "ERROR"
+              fi
+        fi
+    done
+
+}
+
 function Menu_Diag_Network {
 while true; do 
 echo -e "\n ------- Diag Network------"
@@ -172,6 +201,6 @@ done
 }
 
 HeaderLog
-#init the arrayinterface[@] 
+checksoft
 InfoNetworkInterfaces > /dev/null
 Menu_Diag_Network
