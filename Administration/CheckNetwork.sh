@@ -11,10 +11,14 @@
 set -o pipefail
 
 #format date for the logs 
-date=$(date '+%Y-%m-%d %H:%M:%S')
-
+function Date {
+date '+%Y-%m-%d %H:%M:%S'
+}
 # array for the function InfoNetworkInterfaces 
 arrayinterfaces=()
+
+#arry for the function CheckSoft 
+arraysoft=("ip" "mtr" "tcpdump")
 
 #some required privileges root 
 if [ "$EUID" -ne 0 ];then
@@ -30,7 +34,7 @@ pathfilelog="$pathdirlog/CheckNetwork.log"
 SEPARATOR="============================================================="
 
 function HeaderLog {
-    local timestamp=$date
+    local timestamp=$(Date)
         if [ ! -d "$pathdirlog" ];then
                 mkdir -p "$pathdirlog"
         fi
@@ -45,7 +49,7 @@ function HeaderLog {
 function write-log {
         local message="$1"
         local event="$2"
-        local timestamp=$date
+        local timestamp=$(Date)
 
         if [ ! -d "$pathdirlog" ];then
                 mkdir -p "$pathdirlog"
@@ -54,7 +58,7 @@ function write-log {
 }
 
 function EndLog {
-    local timestamp=$date
+    local timestamp=$(Date)
 
     echo "$SEPARATOR" >> "$pathfilelog"
     echo "END SCRIPT" >> "$pathfilelog"
@@ -207,6 +211,6 @@ done
 }
 
 HeaderLog
-checksoft
+CheckSoft
 InfoNetworkInterfaces > /dev/null
 Menu_Diag_Network
