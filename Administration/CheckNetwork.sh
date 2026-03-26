@@ -9,8 +9,14 @@
 # set -o pipefail, force the pipeline return the exitcode  of the first command example for : "result=$({ df -h $filesystem | tr -s ' ' | cut -d ' ' -f5,6 | tail -1; } 2>&1)"
 # the set -o pipefail will get the resultat of "df -h" instead of tail -1
 set -o pipefail
+
+#format date for the logs 
 date=$(date '+%Y-%m-%d %H:%M:%S')
+
+# array for the function InfoNetworkInterfaces 
 arrayinterfaces=()
+
+#some required privileges root 
 if [ "$EUID" -ne 0 ];then
         echo "launch the script with privilege root"
         exit
@@ -39,7 +45,7 @@ function HeaderLog {
 function write-log {
         local message="$1"
         local event="$2"
-        local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+        local timestamp=$date
 
         if [ ! -d "$pathdirlog" ];then
                 mkdir -p "$pathdirlog"
@@ -48,7 +54,7 @@ function write-log {
 }
 
 function EndLog {
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    local timestamp=$date
 
     echo "$SEPARATOR" >> "$pathfilelog"
     echo "END SCRIPT" >> "$pathfilelog"
