@@ -1,0 +1,14 @@
+=============================================================
+START SCRIPT: Restart_Service.sh
+=============================================================
+Date : 2026-03-27 09:22:34
+=============================================================
+2026-03-27 09:22:54 [INFO] - List of services :  mysql smbd ip.
+2026-03-27 09:22:54 [WARNING] - service mysql.service is not present in listing service
+2026-03-27 09:22:54 [INFO] - service smbd is running.
+2026-03-27 09:22:54 [INFO] - Service smbd is already enable.
+2026-03-27 09:22:54 [WARNING] - service ip.service is not present in listing service
+=============================================================
+    END SCRIPT
+Date : 2026-03-27 09:22:54
+=============================================================
