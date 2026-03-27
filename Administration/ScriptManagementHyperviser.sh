@@ -1,10 +1,61 @@
 #!/bin/bash
+#================================================================================================================#
+#                   Description Script Restart_service                                                           #
+# WARNING: you need setup you key ssh in each hypervisor before run this script                                  #
+#                                                                                                                #   
+# this script allows managed your Hypervisor Proxmox or Esxi, or both at the same time                           #                             
+#  you can manage for each hypervisor: VMProxmox and VMEsxi,snapshot,users,containers(LXC for proxmox),Network   #                                                                                                                                                                                                         
+#                                                                                                                #                                                                                             
+#================================================================================================================#
 
+#format date for the logs 
+function Date {
+date '+%Y-%m-%d %H:%M:%S'
+}
 #================================================================================================================#
 #         CONFIGURATION LOGS                                                                                     #
 #================================================================================================================#
-pathdirlog="$HOME/Scripts/Logs"
+pathdirlog="/var/log/Logs_script_personnal"
 pathfilelog="$pathdirlog/ScriptManagementHyperviser.log"
+
+SEPARATOR="============================================================="
+
+function HeaderLog {
+    local timestamp=$(Date)
+
+        if [ ! -d "$pathdirlog" ];then
+                mkdir -p "$pathdirlog"
+        fi
+    echo "$SEPARATOR" >> "$pathfilelog"
+    echo "START SCRIPT: $(basename "$0")" >> "$pathfilelog"
+    echo "$SEPARATOR" >> "$pathfilelog"
+    echo "Date : $timestamp" >> "$pathfilelog"
+    echo "$SEPARATOR" >> "$pathfilelog"
+}
+
+#example to use : write-log  "the regex found" "INFO"
+function write-log {
+        local message="$1"
+        local event="$2"
+        local timestamp=$(Date)
+
+        if [ ! -d "$pathdirlog" ];then
+                mkdir -p "$pathdirlog"
+        fi
+        echo "$timestamp [$event] - $message" >> "$pathfilelog"
+}
+
+function EndLog {
+    local timestamp=$(Date)
+
+    echo "$SEPARATOR" >> "$pathfilelog"
+    echo "    END SCRIPT" >> "$pathfilelog"
+    echo "Date : $timestamp" >> "$pathfilelog"
+    echo "$SEPARATOR" >> "$pathfilelog"
+}
+# 'trap' here ensure endlog function run if the script exits unexpectedly or when the user enters q | Q to quit.
+trap EndLog EXIT INT 
+#===================================================================================================================================================#
 
 function CheckNumber {
     local prompt_message="$1"  
@@ -36,44 +87,6 @@ function CheckString {
         fi
     done
 }
-
-SEPARATOR="============================================================="
-
-function HeaderLog {
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-    
-    echo "$SEPARATOR" >> "$pathfilelog"
-    echo "START SCRIPT: $(basename "$0")" >> "$pathfilelog"
-    echo "$SEPARATOR" >> "$pathfilelog"
-    echo "Date : $timestamp" >> "$pathfilelog"
-    echo "$SEPARATOR" >> "$pathfilelog"
-}
-
-#example to use : write-log  "the regex found" "INFO"
-write-log() {
-        local message="$1"
-        local event="$2"
-        local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-
-        if [ ! -d "$pathdirlog" ];then
-                mkdir -p "$pathdirlog"
-        fi
-
-
-        echo "$timestamp [$event] - $message" >> "$pathfilelog"
-}
-
-function EndLog {
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
-
-    echo "$SEPARATOR" >> "$pathfilelog"
-    echo "    END SCRIPT" >> "$pathfilelog"
-    echo "Date : $timestamp" >> "$pathfilelog"
-    echo "$SEPARATOR" >> "$pathfilelog"
-}
-# 'trap' here ensure endlog function run if the script exits unexpectedly or when the user enters q | Q to quit.
-trap EndLog EXIT INT 
-#===================================================================================================================================================#
 
 function SetupConnection {
 
