@@ -4,7 +4,7 @@
 # this script allows restart, one or several services                                                            #
 # you must indicated without extension .service example: for mysql.service                                       #
 # you must indicate : mysql                                                                                      #                                                                                                             #
-# script interactif                                                                                                               #       
+# script interactif                                                                                              #                                                                                                            #       
 #================================================================================================================#
 
 #some command required privileges root
