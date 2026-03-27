@@ -28,7 +28,7 @@ fi
 #================================================================================================================#
 #         CONFIGURATION LOGS                                                                                     #
 #================================================================================================================#
-pathdirlog="$HOME/Scripts/Script Linux/Administration/Logs"
+pathdirlog="/var/log/Logs_script_personnal"
 pathfilelog="$pathdirlog/CheckNetwork.log"
 
 SEPARATOR="============================================================="
