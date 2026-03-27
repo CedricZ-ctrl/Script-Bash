@@ -1,16 +1,35 @@
 #!/bin/bash
+#================================================================================================================#
+#                   Description Script Install_Samba                                                             #
+# this script allows installed the service samba for the share file with access user                             #
+# the script add user if not present in system, samba need user must be present in system                        #
+# Script interactif                                                                                              #
+#                                                                                                                #       
+#================================================================================================================#
 
+#some command required privileges root
 if [ "$EUID" -ne 0 ];then
         echo "launch the script with privilege root"
         exit
 fi
 
+# variable used for configuration of samba 
 smbconf="/etc/samba/smb.conf"
 usersamba=""
 sharesamba=""
 namedir=""
 
-pathdirlog="$HOME/Scripts/Script Linux/Administration/Logs"
+#arry for the function CheckSoft 
+arraysoft=("samba" "date")
+
+#format date for the logs 
+function Date {
+date '+%Y-%m-%d %H:%M:%S'
+}
+#================================================================================================================#
+#         CONFIGURATION LOGS                                                                                     #
+#================================================================================================================#
+pathdirlog="/var/log/Logs_script_personnal"
 pathfilelog="$pathdirlog/Install_samba.log"
 
 # pour utiliser la function write-log il faut la syntax suivante:
@@ -19,13 +38,12 @@ pathfilelog="$pathdirlog/Install_samba.log"
 SEPARATOR="============================================================="
 
 function HeaderLog {
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    local timestamp=$(Date)
 
     if [ ! -d "$pathdirlog" ];then
                 mkdir -p "$pathdirlog"
         fi
 
-    # On utilise echo directement pour écrire les lignes sans le préfixe Date/INFO
     echo "$SEPARATOR" >> "$pathfilelog"
     echo "START SCRIPT: $(basename "$0")" >> "$pathfilelog"
     echo "$SEPARATOR" >> "$pathfilelog"
@@ -34,20 +52,39 @@ function HeaderLog {
 }
 
 #example : write-log  "the regex found" "INFO"
-write-log() {
+function write-log {
         local message="$1"
         local event="$2"
-        local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+        local timestamp=$(Date)
         echo "$timestamp [$event] - $message" >> "$pathfilelog"
 }
 
 function EndLog {
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    local timestamp=$(Date)
 
     echo "$SEPARATOR" >> "$pathfilelog"
     echo "    END SCRIPT" >> "$pathfilelog"
     echo "Date : $timestamp" >> "$pathfilelog"
     echo "$SEPARATOR" >> "$pathfilelog"
+}
+
+function CheckSoft {
+    for soft in "${arraysoft[@]}"; do
+        checksoft=$(command -v "$soft")
+        if [[ -n "$checksoft" ]]; then
+            write-log "The Soft : $soft is present on your system" "INFO"
+        else
+            write-log "The Soft $soft is not installed, installation in progress ..." "INFO"
+
+            DEBIAN_FRONTEND=noninteractive apt update && apt install -y --no-install-recommends "$soft"
+            if [[ $? -eq 0 ]]; then
+                write-log "Installation of Soft : $soft : done ! " "INFO"
+            else
+                write-log "Installation of soft : $soft failed " "ERROR"
+              fi
+        fi
+    done
+
 }
 function checkstatusFunction {
     local statusfunctionused=$?
@@ -66,24 +103,11 @@ function checkstatusFunction {
 
 }
 
-function CheckSambaispresent {
-sambaispresent=$(command -v smbd)
-if [[ -n "$sambaispresent" ]]; then
-echo "Samba is already present go next step "
-write-log "Samba is already present go next step" "INFO"
-else
-
-echo "Installation Samba && configuration Directory Samba "
-DEBIAN_FRONTEND=noninteractive apt update && apt install -y --no-install-recommends samba
-checkstatusFunction "Installation of Samba" "INFO"
-write-log "Samba not present on system, installation Done"
-
-fi
-}
-
 function CreatDirectorySamba {
 read -p "Enter the name Path Directory target for creating the Samba share,(example /home/'<user>'/DirectoWorks) : " namedir
-mkdir -p $namedir
+mkdir -p "$namedir"
+chown "$usersamba":"$usersamba" "$namedir"
+chmod 750 "$namedir"
 checkstatusFunction "Init Directory Share : $namedir " "INFO"
 
 }
@@ -97,7 +121,7 @@ function AddUserSamba {
     if ! id "$usersamba" &>/dev/null; then
     echo "add user $usersamba in system is mandatory for samba"
     useradd -m "$usersamba"
-    checkstatusFunction "Add Linux User " "INFO "
+    checkstatusFunction "Add Linux User : "$usersamba"" "INFO "
     fi
 
     if [[ -n "$usersamba" && -n "$passwordsamba" && -n "$sharesamba" ]]; then
@@ -129,10 +153,10 @@ checkstatusFunction "service smbd restarted " "INFO"
 
 
 HeaderLog
-CheckSambaispresent
+CheckSoft
 if [[ -f "$smbconf" ]]; then
-CreatDirectorySamba
 AddUserSamba
+CreatDirectorySamba
 confsamba
 else
 echo "$smbconf don't exist"
