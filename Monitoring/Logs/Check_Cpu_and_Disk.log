@@ -1,0 +1,59 @@
+=============================================================
+START SCRIPT: Check_Cpu_and_Disk.sh
+=============================================================
+Date : 2026-03-27 15:23:52
+=============================================================
+2026-03-27 15:24:53 [INFO] -  stress-ng: info:  [46514] dispatching hogs: 2 cpu, 2 io
+stress-ng: info:  [46514] successful run completed in 60.07s (1 min, 0.07 secs)
+stress-ng: info:  [46514] stressor       bogo ops real time  usr time  sys time   bogo ops/s   bogo ops/s
+stress-ng: info:  [46514]                           (secs)    (secs)    (secs)   (real time) (usr+sys time)
+stress-ng: info:  [46514] cpu               16285     60.04     55.90     10.39       271.23       245.66
+stress-ng: info:  [46514] io               961728     60.00      1.74     16.82     16029.35     51817.24 : 
+2026-03-27 15:24:58 [INFO] - Resultat for the disk sda : smartctl 7.1 2019-12-30 r5022 [x86_64-linux-5.4.0-216-generic] (local build)
+Copyright (C) 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               QEMU
+Product:              QEMU HARDDISK
+Revision:             2.5+
+Compliance:           SPC-3
+User Capacity:        10,737,418,240 bytes [10.7 GB]
+Logical block size:   512 bytes
+LU is thin provisioned, LBPRZ=0
+Device type:          disk
+Local Time is:        Fri Mar 27 15:24:58 2026 CET
+SMART support is:     Unavailable - device lacks SMART capability.
+
+=== START OF READ SMART DATA SECTION ===
+Current Drive Temperature:     0 C
+Drive Trip Temperature:        0 C
+
+Error Counter logging not supported
+
+Device does not support Self Test logging
+2026-03-27 15:24:58 [INFO] - Resultat for the disk sdb : smartctl 7.1 2019-12-30 r5022 [x86_64-linux-5.4.0-216-generic] (local build)
+Copyright (C) 2002-19, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Vendor:               QEMU
+Product:              QEMU HARDDISK
+Revision:             2.5+
+Compliance:           SPC-3
+User Capacity:        10,737,418,240 bytes [10.7 GB]
+Logical block size:   512 bytes
+LU is thin provisioned, LBPRZ=0
+Device type:          disk
+Local Time is:        Fri Mar 27 15:24:58 2026 CET
+SMART support is:     Unavailable - device lacks SMART capability.
+
+=== START OF READ SMART DATA SECTION ===
+Current Drive Temperature:     0 C
+Drive Trip Temperature:        0 C
+
+Error Counter logging not supported
+
+Device does not support Self Test logging
+=============================================================
+END SCRIPT
+Date : 2026-03-27 15:25:00
+=============================================================
