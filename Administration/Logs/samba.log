@@ -1,16 +1,18 @@
 =============================================================
-START SCRIPT: Install_Samb.sh
+START SCRIPT: install_samba.sh
 =============================================================
-Date : 2026-02-20 20:26:49
+Date : 2026-03-27 08:10:47
 =============================================================
-2026-02-20 20:26:49 [INFO] - Samba is already present go next step
-2026-02-20 20:26:54 [INFO] - Init Directory Share : /tmp/test
-2026-02-20 20:27:09 [INFO] - Add Linux User
-2026-02-20 20:27:09 [INFO] - Information for Added a user and configured the directory share
-2026-02-20 20:27:09 [INFO] - add user cedric in smbpasswd
-2026-02-20 20:27:09 [INFO] - configuration /etc/samba/smb.conf
-2026-02-20 20:27:09 [INFO] - service smbd restarted
+2026-03-27 08:10:47 [INFO] - The Soft samba is not installed, installation in progress ...
+2026-03-27 08:10:56 [INFO] - Installation of Soft : samba : done !
+2026-03-27 08:10:56 [INFO] - The Soft : date is present on your system
+2026-03-27 08:11:13 [INFO] - Add Linux User Testuserscript
+2026-03-27 08:11:13 [INFO] - Information for Added a user and configured the directory share
+2026-03-27 08:11:13 [INFO] - add user Testuserscript in smbpasswd
+2026-03-27 08:11:32 [INFO] - Init Directory Share : /home/bandit/TestSambaShare
+2026-03-27 08:11:32 [INFO] - configuration /etc/samba/smb.conf
+2026-03-27 08:11:32 [INFO] - service smbd restarted
 =============================================================
     END SCRIPT
-Date : 2026-02-20 20:27:09
+Date : 2026-03-27 08:11:32
 =============================================================
