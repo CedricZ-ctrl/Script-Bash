@@ -21,7 +21,7 @@ function Date {
     date '+%Y-%m-%d %H:%M:%S'
 }
 pathdirlog="/var/log/Logs_script_personnal"
-pathfilelog="$pathdirlog/CheckCpuRamDisk.log"
+pathfilelog="$pathdirlog/Check_Cpu_and_Disk.log"
 
 SEPARATOR="============================================================="
 
@@ -60,15 +60,33 @@ function EndLog {
 # 'trap' here ensure endlog function run if the script exits unexpectedly or when the user enters q | Q to quit.
 trap EndLog EXIT INT 
 
+function CheckSoft {
+    for soft in "${arraysoft[@]}"; do
+        checksoft=$(command -v "$soft")
+        if [[ -n "$checksoft" ]]; then
+            write-log "The Soft : $soft is present on your system" "INFO"
+        else
+            write-log "The Soft $soft is not installed, installation in progress ..." "INFO"
 
+            DEBIAN_FRONTEND=noninteractive apt update && apt install -y --no-install-recommends "$soft"
+            if [[ $? -eq 0 ]]; then
+                write-log "Installation of Soft : $soft : done ! " "INFO"
+            else
+                write-log "Installation of soft : $soft failed " "ERROR"
+              fi
+        fi
+    done
+
+}
 function StressCPU {
 
     dircpu="/proc/cpuinfo"
     cpuinfo=$(grep -c "^processor" "$dircpu")
 
     if [[ -n "$cpuinfo" ]]; then
+    echo "Test Cpu in progress duration 60seconds..."
     command0=$(stress-ng --metrics-brief --timeout 60s --cpu "$cpuinfo" --io "$cpuinfo" --aggressive --ignite-cpu --maximize --pathological 2>&1)
-   
+    
         if [[ $? -eq 0 ]]; then 
         echo "$command0"
         write-log " $command0 : " "INFO"
