@@ -4,9 +4,15 @@ pathdirlog="/var/log/Logs_script_personnal"
 pathfilelog="$pathdirlog/addUser.log"
 
 #arry for the function CheckSoft 
-arraysoft=("adduser" "getent")
+arraysoft=("adduser" "getent" "passwd")
 SEPARATOR="============================================================="
 
+
+#some required privileges root 
+if [ "$EUID" -ne 0 ];then
+        echo "launch the script with privilege root"
+        exit
+fi
 function HeaderLog {
     local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 
@@ -34,7 +40,7 @@ function EndLog {
     local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 
     echo "$SEPARATOR" >> "$pathfilelog"
-    echo "    END SCRIPT" >> "$pathfilelog"
+    echo "END SCRIPT" >> "$pathfilelog"
     echo "Date : $timestamp" >> "$pathfilelog"
     echo "$SEPARATOR" >> "$pathfilelog"
 }
@@ -50,10 +56,12 @@ function Adduser {
            read -p  "the user $name is not present, would you add the $name ? (y/n)" answer
            case $answer in 
            y|Y|yes|Yes)
-	       useradd "$name"
+	       addusercommand=$(useradd -m "$name" -s /bin/bash 2>&1)
            if [[ $? -eq 0 ]]; then 
            write-log "the user $name has been created" "INFO"
            echo "the user $name has been created"
+           echo "set password for $name"
+           passwd "$name"
            else 
            write-log "the command adduser failed" "ERROR"
            echo "the command adduser failed"
@@ -72,7 +80,6 @@ function Adduser {
 	       echo "user $name already present "
        fi
 }
-
 function CheckSoft {
     for soft in "${arraysoft[@]}"; do
         checksoft=$(command -v "$soft")
