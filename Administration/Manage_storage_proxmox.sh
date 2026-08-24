@@ -1,7 +1,16 @@
 #!/bin/bash
+
+####################################################################################################################
+#                                                                                                                  #
+#                       Description Script :                                                                       #
+#                                                                                                                  #
+# this script change the source location of storage disk principal of VM, for stocked in SSD1To                    #
+#                                                                                                                  #
+####################################################################################################################
+
 set -euo pipefail
 IDVM="$1"
-SourceDisk=$(qm config $IDVM | grep -E "^(ide0|sata0|scsi0|virtio0)" | grep -vE "cloudinit" | grep -vE "media=cdrom" | cut -d ' ' -f1 | tr -d ':')
+SourceDisk=$(qm config $IDVM | grep -E "^(ide|sata|scsi|virtio)[0-9]+"| grep -vE "scsihw" | grep -vE "cloudinit" | grep -vE "media=cdrom" | cut -d ' ' -f1 | tr -d ':')
 Storage="SSD1To" 
 
 function Date {
