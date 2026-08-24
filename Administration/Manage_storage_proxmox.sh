@@ -10,12 +10,6 @@
 
 set -euo pipefail
 
-function checkArgs {
-    if [ $# -eq 0 ]; then
-    write-log "Not Args passed, retry with args please " "ERROR"
-    exit 1
-    fi
-}
 
 function Date {
 date '+%Y-%m-%d %H:%M:%S'
@@ -62,6 +56,14 @@ function EndLog {
     echo "Date : $timestamp" >> "$pathfilelog"
     echo "$SEPARATOR" >> "$pathfilelog"
 }
+
+function checkArgs {
+    if [ $# -eq 0 ]; then
+    write-log "Not Args passed, retry with args please " "ERROR"
+    exit 1
+    fi
+}
+
 
 #$1 argument it's the VMID 
 function checkvmidrunning {
