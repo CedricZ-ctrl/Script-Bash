@@ -17,10 +17,6 @@ function checkArgs {
     fi
 }
 
-IDVM="$1"
-SourceDisk=$(qm config $IDVM | grep -E "^(ide|sata|scsi|virtio)[0-9]+"| grep -vE "scsihw" | grep -vE "cloudinit" | grep -vE "media=cdrom" | cut -d ' ' -f1 | tr -d ':')
-Storage="SSD1To" 
-
 function Date {
 date '+%Y-%m-%d %H:%M:%S'
 }
@@ -110,5 +106,9 @@ function MigrateStorage {
 
 HeaderLog
 checkArgs "$@"
+IDVM="$1"
+SourceDisk=$(qm config $IDVM | grep -E "^(ide|sata|scsi|virtio)[0-9]+"| grep -vE "scsihw" | grep -vE "cloudinit" | grep -vE "media=cdrom" | cut -d ' ' -f1 | tr -d ':')
+Storage="SSD1To"
+
 checkvmidrunning "$1" 
 EndLog
