@@ -84,7 +84,8 @@ function checkvmidrunning {
     if [ "$statevm" == "running" ];then 
         qm stop $IDVM
         if [ $? -eq 0 ];then 
-        write-log "the VM $IDVM is running and now stopped" "INFO"
+        write-log "the VM $IDVM is running and now stopped migration in progress ..." "INFO"
+	MigrateStorage
         else 
         write-log "the VM $IDVM not stopped in error occurred in process stop" "ERROR"
         exit 1 
