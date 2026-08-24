@@ -8,7 +8,7 @@
 #                                                                                                                  #
 ####################################################################################################################
 
-set -euo pipefail
+set -uo pipefail
 
 
 function Date {
@@ -83,7 +83,7 @@ function checkvmidrunning {
         qm stop $IDVM
         if [ $? -eq 0 ];then 
         write-log "the VM $IDVM is running and now stopped migration in progress ..." "INFO"
-	MigrateStorage
+        MigrateStorage
         else 
         write-log "the VM $IDVM not stopped in error occurred in process stop" "ERROR"
         exit 1 
@@ -96,21 +96,42 @@ function checkvmidrunning {
 }
 
 function MigrateStorage {
-    qm disk move "$IDVM" "$SourceDisk" "$Storage" 
-    if [ $? -eq 0 ]; then 
-    write-log "Migration vmid $IDVM local-lvm to $Storage completed" "INFO"
-    else 
-    write-log "Migration Failure check log " "ERROR"
-    exit 1 
+
+    for disk in $SourceDisk; do
+    qm disk move "$IDVM" "$disk" "$Storage" 
+        if [ $? -eq 0 ]; then 
+         write-log "Migration vmid $IDVM $disk local-lvm to $Storage completed" "INFO"
+         
+        else 
+        write-log "Migration Failure check log " "ERROR"
+        exit 1 
     fi
+done
+}
+function PurgeDiskUnused {
+        local PurgeUnused
+        PurgeUnused=$(qm config $IDVM | grep -E "^(unused)[0-9]+"| cut -d ' ' -f1 | tr -d ':')
+
+    for unused in $PurgeUnused; do
+            qm set "$IDVM" -delete "$unused" 
+            if [ $? -eq 0 ]; then
+                    write-log "Delete $unused Disk" "INFO"
+            else
+                    write-log "Delete Unused no work check log please" "ERROR"
+                    exit 1
+            fi
+    done
 }
 
 
 HeaderLog
 checkArgs "$@"
 IDVM="$1"
-SourceDisk=$(qm config $IDVM | grep -E "^(ide|sata|scsi|virtio)[0-9]+"| grep -vE "scsihw" | grep -vE "cloudinit" | grep -vE "media=cdrom" | cut -d ' ' -f1 | tr -d ':')
+SourceDisk=$(qm config $IDVM | grep -E "^(ide|sata|scsi|virtio)[0-9]+"| grep -vE "scsihw|cloudinit|media=cdrom" | cut -d ' ' -f1 | tr -d ':')
 Storage="SSD1To"
 
-checkvmidrunning "$1" 
+checkvmidrunning "$1"
+PurgeDiskUnused
 EndLog
+
+
