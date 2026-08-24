@@ -9,6 +9,14 @@
 ####################################################################################################################
 
 set -euo pipefail
+
+function checkArgs {
+    if [ $# -eq 0 ]; then
+    write-log "Not Args passed, retry with args please " "ERROR"
+    exit 1
+    fi
+}
+
 IDVM="$1"
 SourceDisk=$(qm config $IDVM | grep -E "^(ide|sata|scsi|virtio)[0-9]+"| grep -vE "scsihw" | grep -vE "cloudinit" | grep -vE "media=cdrom" | cut -d ' ' -f1 | tr -d ':')
 Storage="SSD1To" 
@@ -59,12 +67,6 @@ function EndLog {
     echo "$SEPARATOR" >> "$pathfilelog"
 }
 
-function checkArgs {
-    if [ $# -eq 0 ]; then
-    write-log "Not Args passed, retry with args please " "ERROR"
-    exit 1 
-    fi
-}
 #$1 argument it's the VMID 
 function checkvmidrunning {
     
